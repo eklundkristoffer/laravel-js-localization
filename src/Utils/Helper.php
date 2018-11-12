@@ -19,17 +19,6 @@ class Helper
     protected $messagesToExport = [];
 
     /**
-     * @param array $messages    Array of messages.
-     * @return void
-     */
-    public function addArrayToExport(array $messages)
-    {
-        $this->messagesToExport = array_merge(
-            $this->messagesToExport, $messages
-        );
-    }
-
-    /**
      * Allows registration of additional messages to
      * export to the JS code. The additional messages
      * registered using this method extend the

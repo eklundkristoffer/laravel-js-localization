@@ -75,6 +75,16 @@ class MessageCachingService extends AbstractCachingService
         $messageKeys = $this->getMessageKeys();
         $translatedMessages = $this->getTranslatedMessagesForLocales($messageKeys, $locales);
 
+        foreach (glob(resource_path('lang/*.json')) as $languageFile) {
+            $locale = explode('.', basename($languageFile))[0];
+
+            if (! isset($translatedMessages[$locale])) {
+                continue;
+            }
+
+            $translatedMessages[$locale] = array_merge($translatedMessages[$locale], (array)json_decode(file_get_contents($languageFile)));
+        }
+
         return json_encode($translatedMessages);
     }
 
@@ -121,14 +131,14 @@ class MessageCachingService extends AbstractCachingService
     {
         $translatedMessages = [];
 
-        foreach ($messageKeys as $key => $value) {
+        foreach ($messageKeys as $key) {
             $translation = Lang::get($key, [], $locale);
 
             if (is_array($translation)) {
                 $flattened = $this->flattenTranslations($translation, $key.'.');
                 $translatedMessages = array_merge($translatedMessages, $flattened);
             } else {
-                $translatedMessages[$key] = $value;
+                $translatedMessages[$key] = $translation;
             }
         }
 
