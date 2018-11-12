@@ -8,7 +8,7 @@ use JsLocalization\Exceptions\FileNotFoundException;
 
 class Helper
 {
-    
+
     /**
      * Array of message keys. A set of messages that are
      * supposed to be exported to the JS code in addition
@@ -17,6 +17,17 @@ class Helper
      * @var array
      */
     protected $messagesToExport = [];
+
+    /**
+     * @param array $messages    Array of messages.
+     * @return void
+     */
+    public function addArrayToExport(array $messages)
+    {
+        $this->messagesToExport = array_merge(
+            $this->messagesToExport, $messages
+        );
+    }
 
     /**
      * Allows registration of additional messages to

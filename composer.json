@@ -1,5 +1,5 @@
 {
-    "name": "andywer/js-localization",
+    "name": "eklundkristoffer/js-localization",
     "description": "Laravel package to provide localizations to the Javascript code.",
     "keywords": ["laravel", "javascript", "localization", "translation", "messages"],
     "license": "MIT",
@@ -30,7 +30,12 @@
     },
     "extra": {
         "component": "package",
-        "frameworks": ["Laravel 5"]
+        "frameworks": ["Laravel 5"],
+        "laravel": {
+            "providers": [
+                "JsLocalization\\JsLocalizationServiceProvider"
+            ]
+        }
     },
     "minimum-stability": "dev",
     "repositories": [

@@ -29,7 +29,7 @@ class MessageCachingService extends AbstractCachingService
      */
     const CACHE_TIMESTAMP_KEY = 'js-localization-messages-last-modified';
 
-    
+
     public function __construct()
     {
         parent::__construct(self::CACHE_KEY, self::CACHE_TIMESTAMP_KEY);
@@ -112,7 +112,7 @@ class MessageCachingService extends AbstractCachingService
 
     /**
      * Returns the translated messages for the given keys.
-     * 
+     *
      * @param array $messageKeys
      * @param $locale
      * @return array The translated messages as [ <message id> => <translation>, ... ]
@@ -121,14 +121,14 @@ class MessageCachingService extends AbstractCachingService
     {
         $translatedMessages = [];
 
-        foreach ($messageKeys as $key) {
+        foreach ($messageKeys as $key => $value) {
             $translation = Lang::get($key, [], $locale);
 
             if (is_array($translation)) {
                 $flattened = $this->flattenTranslations($translation, $key.'.');
                 $translatedMessages = array_merge($translatedMessages, $flattened);
             } else {
-                $translatedMessages[$key] = $translation;
+                $translatedMessages[$key] = $value;
             }
         }
 
